@@ -4,4 +4,7 @@
 //= require underscore
 //= require jquery
 //= require d3graph
-//= require_tree .
+//= require barchart
+//= require map
+//= require navigation
+//= require bundeslaenderPercent
