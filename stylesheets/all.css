@@ -236,36 +236,57 @@ body {
   font-family: sans-serif; }
 
 /* line 5, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
+h1 {
+  font-size: 2em; }
+
+/* line 7, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
+h2 {
+  font-size: 1.5em; }
+
+/* line 9, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
 .content {
   max-width: 68em;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  margin-top: 1em; }
   /* line 20, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/bourbon/addons/_clearfix.scss */
   .content::after {
     clear: both;
     content: "";
     display: table; }
-  /* line 7, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
+  /* line 12, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
   .content .text {
+    display: block;
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 23.23176%;
+    width: 31.76157%;
     padding: 1em 0 0 0; }
+    /* line 20, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/bourbon/addons/_clearfix.scss */
+    .content .text::after {
+      clear: both;
+      content: "";
+      display: table; }
     /* line 87, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/neat/grid/_span-columns.scss */
     .content .text:last-child {
       margin-right: 0; }
-  /* line 10, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
-  .content #top-10 {
+  /* line 16, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
+  .content .graph {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 57.35098%; }
+    width: 48.82117%; }
     /* line 87, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/neat/grid/_span-columns.scss */
-    .content #top-10:last-child {
+    .content .graph:last-child {
       margin-right: 0; }
+    /* line 18, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
+    .content .graph h2 {
+      text-align: center; }
+      /* line 20, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
+      .content .graph h2 span {
+        font-size: 0.5em; }
 
-/* line 12, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
+/* line 22, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_main.sass */
 #map {
   float: left;
   display: block;
@@ -282,41 +303,49 @@ body {
     display: table; }
 
 /* line 3, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_bundeslaender.sass */
-#bundeslaender #bundeslaender-chart rect {
+#bundeslaender #percent-bl-chart rect {
   fill: #72ABB2; }
 /* line 5, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_bundeslaender.sass */
-#bundeslaender #bundeslaender-chart text {
+#bundeslaender #percent-bl-chart text {
   font-size: 0.7em; }
 /* line 7, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_bundeslaender.sass */
-#bundeslaender #bundeslaender-chart .axis path,
-#bundeslaender #bundeslaender-chart .axis line {
+#bundeslaender #percent-bl-chart .axis path,
+#bundeslaender #percent-bl-chart .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges; }
+/* line 12, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_bundeslaender.sass */
+#bundeslaender #percent-bl-chart .axis.y {
+  display: none; }
+
+/* line 2, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_gender.sass */
+#percent-gender-chart .male {
+  fill: blue; }
 
 /* line 8, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
 #map {
   background: #6acde4;
   height: 650px;
-  position: relative; }
-  /* line 13, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  position: relative;
+  margin-bottom: 80px; }
+  /* line 14, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #map .country {
     stroke: #777;
     stroke-width: 0.5; }
-    /* line 16, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+    /* line 17, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
     #map .country.active {
       stroke: #000;
       stroke-width: 1; }
-  /* line 19, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  /* line 20, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #map .bank {
     stroke: #fefefe;
     fill: #698C86;
     stroke-width: 0.5; }
-    /* line 23, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+    /* line 24, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
     #map .bank.active {
       fill: red;
       stroke-width: 1; }
-  /* line 27, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  /* line 28, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #map #legend {
     position: absolute;
     bottom: 20px;
@@ -328,7 +357,7 @@ body {
     padding: 10px;
     font-size: 0.6em; }
 
-/* line 38, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+/* line 39, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
 #tooltip {
   position: absolute;
   left: 0;
@@ -340,7 +369,7 @@ body {
   font-size: 0.8em;
   box-shadow: 5px 5px 9px -3px #c1c1c1;
   text-align: center; }
-  /* line 50, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  /* line 51, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #tooltip.country .title {
     background: #526970;
     border-bottom: 1px solid #3c4d53;
@@ -348,23 +377,23 @@ body {
     border-top-right-radius: 0.5em;
     padding: 0;
     margin: 0 0 0.3em 0; }
-  /* line 57, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  /* line 58, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #tooltip.country h4 {
     color: #fff;
     padding: 0.4em 0;
     margin: 0;
     font-size: 1.2em; }
-  /* line 63, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  /* line 64, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #tooltip.country .details p {
     font-size: 0.9em;
     color: #909090;
     padding: 0;
     margin: 0; }
-  /* line 68, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  /* line 69, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #tooltip.country .details h5 {
     font-size: 2.4em;
     margin: 0 0 0.25em 0; }
-  /* line 71, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+  /* line 72, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
   #tooltip.bank {
     width: 250px; }
     /* line 20, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/bourbon/addons/_clearfix.scss */
@@ -372,22 +401,22 @@ body {
       clear: both;
       content: "";
       display: table; }
-    /* line 74, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+    /* line 75, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
     #tooltip.bank .bank-name {
       width: 75%;
       float: left;
       padding: 10px;
       text-align: left; }
-      /* line 79, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+      /* line 80, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
       #tooltip.bank .bank-name h4 {
         font-size: 1.5em;
         color: #000;
         margin: 0; }
-      /* line 83, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+      /* line 84, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
       #tooltip.bank .bank-name h5 {
         font-size: 1.2em;
         margin: 0; }
-    /* line 86, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+    /* line 87, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
     #tooltip.bank .detail {
       width: 25%;
       float: left;
@@ -395,24 +424,24 @@ body {
       border-left: 1px solid #e6e5e3;
       border-bottom-right-radius: 0.5em;
       border-top-right-radius: 0.5em; }
-      /* line 93, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+      /* line 94, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
       #tooltip.bank .detail .entry {
         padding: 5px;
         border-bottom: 1px solid #e6e5e3; }
-      /* line 96, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+      /* line 97, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
       #tooltip.bank .detail:last-child {
         border-bottom: none; }
-      /* line 99, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+      /* line 100, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
       #tooltip.bank .detail .failed .title {
         color: #909090;
         font-size: 0.8em;
         padding: 0;
         margin: 0; }
-      /* line 104, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+      /* line 105, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
       #tooltip.bank .detail .failed p {
         padding: 0;
         margin: 0; }
-        /* line 107, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
+        /* line 108, /Development/work/civicvision/viz/betreuungsgeld/source/stylesheets/_map.sass */
         #tooltip.bank .detail .failed p.date {
           color: #000;
           font-size: 1.2em;

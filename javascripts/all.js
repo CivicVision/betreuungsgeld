@@ -20663,7 +20663,8 @@ return jQuery;
       this.yScale = d3.scale.linear().range([this.options.height, 0]).domain(this.yScaleDomain);
       this.xScale = d3.scale.ordinal().rangeRoundBands([0, this.options.width], .1).domain(this.xScaleDomain);
       this.xAxisScale = d3.scale.ordinal().rangeRoundBands([0, this.options.width], .1).domain(this.xScaleDomain);
-      return this.xAxis = d3.svg.axis().scale(this.xAxisScale).orient("bottom");
+      this.xAxis = d3.svg.axis().scale(this.xAxisScale).orient("bottom");
+      return this.yAxis = d3.svg.axis().scale(this.yScale).orient("left");
     };
 
     D3Graph.prototype.appendAxis = function() {
@@ -20824,6 +20825,7 @@ return jQuery;
       this.createAxisAndScales(this.data);
       this.createSvg();
       this.draw(this.data);
+      this.createYAxis();
       this.appendAxis();
       if (this.options.rotate.x) {
         return this.rotateLabels("x");
@@ -20831,6 +20833,106 @@ return jQuery;
     };
 
     return Barchart;
+
+  })(this.D3Graph);
+
+}).call(this);
+(function() {
+  var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty,
+    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  this.PointGraph = (function(superClass) {
+    extend(PointGraph, superClass);
+
+    function PointGraph(data1, options) {
+      this.data = data1;
+      this.options = options != null ? options : {};
+      this.valueClasss = bind(this.valueClasss, this);
+      this.options = _.defaults(this.options, {
+        width: 900,
+        height: 350,
+        margin: {
+          top: 40,
+          right: 30,
+          bottom: 10,
+          left: 40
+        },
+        circles: {
+          radius: 12,
+          padding: 10
+        }
+      });
+      this.value1Key = "key1";
+      this.value2Key = "key2";
+      this.valueClass1 = "value-1";
+      this.valueClass2 = "value-2";
+    }
+
+    PointGraph.prototype.setValueKeys = function(value1, value2) {
+      this.value1Key = value1;
+      return this.value2Key = value2;
+    };
+
+    PointGraph.prototype.setValueClasses = function(valueClasses) {
+      return this.valueClasses = valueClasses;
+    };
+
+    PointGraph.prototype.valueClasss = function(d, i) {
+      var className, j, len, ref, value;
+      ref = this.valueClasses;
+      for (j = 0, len = ref.length; j < len; j++) {
+        value = ref[j];
+        if (indexOf.call(value.range, i) >= 0) {
+          className = value.className;
+        }
+      }
+      return className;
+    };
+
+    PointGraph.prototype.drawItem = function(graphGroup) {
+      graphGroup.selectAll("circle").remove();
+      graphGroup.append("circle").attr("r", this.options.circles.radius).attr("class", this.valueClasss);
+      return graphGroup.exit().remove();
+    };
+
+    PointGraph.prototype.draw = function(data) {
+      var graphGroup, num, teiler;
+      data = (function() {
+        var j, ref, results;
+        results = [];
+        for (num = j = ref = data[0][this.value1Key]; ref <= 1 ? j <= 1 : j >= 1; num = ref <= 1 ? ++j : --j) {
+          results.push(data[0]);
+        }
+        return results;
+      }).call(this);
+      teiler = Math.floor(this.options.width / (2 * this.options.circles.radius + this.options.circles.padding));
+      graphGroup = this.svgSelection.selectAll('g.multiples').data(data);
+      graphGroup.enter().append("g");
+      graphGroup.attr("class", "multiples").attr("transform", (function(_this) {
+        return function(d, i) {
+          var translateX, translateY;
+          translateX = (i % teiler) * (2 * _this.options.circles.radius + _this.options.circles.padding);
+          translateY = _this.options.height - (Math.ceil((i + 1) / teiler) * (_this.options.circles.padding + 2 * _this.options.circles.radius));
+          return "translate(" + translateX + "," + translateY + ")";
+        };
+      })(this));
+      return this.drawItem(graphGroup);
+    };
+
+    PointGraph.prototype.render = function(element) {
+      this.element = element;
+      this.createSvg();
+      return this.draw(this.data);
+    };
+
+    PointGraph.prototype.update = function(data1) {
+      this.data = data1;
+      return this.draw(this.data);
+    };
+
+    return PointGraph;
 
   })(this.D3Graph);
 
@@ -20859,31 +20961,100 @@ return jQuery;
 }).call(this);
 (function() {
   $(function() {
-    var topBanksSQL;
-    topBanksSQL = "https://milafrerichs.cartodb.com/api/v2/sql?q=SELECT COUNT(cartodb_id) as banks, country FROM failed_bank_tracker_geom GROUP BY country ORDER BY banks DESC LIMIT 10";
-    return d3.json(topBanksSQL, function(data) {
+    var bundeslaenderPercentSql;
+    bundeslaenderPercentSql = "https://milafrerichs.cartodb.com/api/v2/sql?q=SELECT land, (leistungsbezuge_insgesamt * 100 / kinder_2013) as percent_empfaenger FROM elterngeld_4_quartal_kinder_2013 ORDER BY percent_empfaenger";
+    return queue().defer(d3.csv, "data/abkuerzungen.csv").defer(d3.json, bundeslaenderPercentSql).await(function(error, abkuerzungen, data) {
       var barchart, padding, width;
       data = data.rows;
       padding = 40;
-      width = $('#top-10').width() - padding;
+      data.map(function(d) {
+        return d.percent_empfaenger = Math.round(d.percent_empfaenger * 100) / 100;
+      });
+      data.map(function(d) {
+        return d.land = _.findWhere(abkuerzungen, {
+          land: d.land
+        }).abkuerzung;
+      });
+      width = $('#bundeslaender').width() - padding;
       barchart = new Barchart(data, {
         width: width
       });
       barchart.setXDomain(data.map(function(d) {
-        return d.country;
+        return d.land;
       }));
       barchart.setYDomain([
         0, d3.max(data, function(d) {
-          return d.banks;
+          return d.percent_empfaenger;
         })
       ]);
-      barchart.setValueKey('banks');
-      barchart.setGroupKey('country');
-      return barchart.render('#top-10-chart');
+      barchart.setValueKey('percent_empfaenger');
+      barchart.setGroupKey('land');
+      return barchart.render('#percent-bl-chart');
     });
   });
 
 }).call(this);
+(function() {
+  $(function() {
+    var data, genderGraph, height, j, margin, options, padding, results, valueClasses, width;
+    padding = 10;
+    height = 200;
+    width = $('#bundeslaender').width() - padding;
+    data = [
+      {
+        sum: 100,
+        muetter: 95
+      }
+    ];
+    margin = {
+      top: 10,
+      right: 10,
+      left: 10,
+      bottom: 10
+    };
+    options = {
+      height: height,
+      width: width,
+      margin: margin,
+      circles: {
+        radius: 15,
+        padding: 0
+      }
+    };
+    genderGraph = new PointGraph(data, options);
+    genderGraph.drawItem = function(graphGroup) {
+      graphGroup.selectAll("image").remove();
+      graphGroup.append("image").attr("r", this.options.circles.radius).attr("class", this.valueClasss).attr("xlink:href", (function(_this) {
+        return function(d, i) {
+          return "images/" + (_this.valueClasss(d, i)) + ".png";
+        };
+      })(this)).attr("height", this.options.circles.radius * 2).attr("width", this.options.circles.radius * 2);
+      return graphGroup.exit().remove();
+    };
+    genderGraph.setValueKeys("sum", "muetter");
+    valueClasses = [
+      {
+        range: [0, 1, 2, 3, 4],
+        className: "male"
+      }, {
+        range: (function() {
+          results = [];
+          for (j = 5; j < 100; j++){ results.push(j); }
+          return results;
+        }).apply(this),
+        className: "female"
+      }
+    ];
+    genderGraph.setValueClasses(valueClasses);
+    return genderGraph.render("#percent-gender-chart");
+  });
+
+}).call(this);
+
+
+
+
+
 
 
 

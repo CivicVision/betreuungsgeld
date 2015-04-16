@@ -114,6 +114,7 @@
       this.createAxisAndScales(this.data);
       this.createSvg();
       this.draw(this.data);
+      this.createYAxis();
       this.appendAxis();
       if (this.options.rotate.x) {
         return this.rotateLabels("x");

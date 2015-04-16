@@ -23,7 +23,8 @@
       this.yScale = d3.scale.linear().range([this.options.height, 0]).domain(this.yScaleDomain);
       this.xScale = d3.scale.ordinal().rangeRoundBands([0, this.options.width], .1).domain(this.xScaleDomain);
       this.xAxisScale = d3.scale.ordinal().rangeRoundBands([0, this.options.width], .1).domain(this.xScaleDomain);
-      return this.xAxis = d3.svg.axis().scale(this.xAxisScale).orient("bottom");
+      this.xAxis = d3.svg.axis().scale(this.xAxisScale).orient("bottom");
+      return this.yAxis = d3.svg.axis().scale(this.yScale).orient("left");
     };
 
     D3Graph.prototype.appendAxis = function() {
