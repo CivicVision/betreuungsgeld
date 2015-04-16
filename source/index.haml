@@ -6,18 +6,31 @@ title: Betreuungsgeld
   .text
     .explanation
       %p
-        Anteil der Betreuungsgeldempfänger an den möglichen Empfängern (unter dreijährige Kinder).
+        Anteil der Betreuungsgeldempfänger an möglichen Empfängern (unter dreijährige Kinder).
       %p
-        Datenbasis: Statistisches Bundesamt
+        Datenbasis: 
+        %a(href="https://www.destatis.de/DE/Publikationen/Thematisch/Soziales/Elterngeld/BetreuungsgeldLeistungsbezuegeVj.html")
+          Statistisches Bundesamt
         %br
         Datenzeitpunkt der unter Dreijährigen: Dez 2013
   .graph#bundeslaender
-    %h2 Anteil der Empfänger nach Bundesland
+    %h2
+      Anteil der Empfänger nach Bundesland
+      %br
+      %span in %
     #percent-bl-chart
   .text
     .explanation
+      %p
+        Anteil der Empfänger nach Geschlecht. Nur 5 von 100 Empfängern sind Väter. Der Rest sind Mütter.
+        %br
+        %p
+          Datenbasis: 
+          %a(href="https://www.destatis.de/DE/Publikationen/Thematisch/Soziales/Elterngeld/BetreuungsgeldLeistungsbezuegeVj.html")
+            Statistisches Bundesamt
   .graph#gender
     %h2 Anteil der Empfänger nach Geschlecht
     #percent-gender-chart
-  %p Kreise zeigen die absoluten Zahlen
+  .text
+    %p Flächenfarbe gibt den Prozentsatz der Empfänger wieder, die Kreise zeigen die absoluten Zahlen.
   #map
