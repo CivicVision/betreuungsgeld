@@ -5,6 +5,8 @@
 //= require jquery
 //= require d3graph
 //= require barchart
+//= require pointgraph
 //= require map
 //= require navigation
 //= require bundeslaenderPercent
+//= require genderGraph
