@@ -2,13 +2,21 @@ body
   background: #fff
   font-family: sans-serif
 
+h1
+  font-size: 2em
+h2
+  font-size: 1.5em
 .content
   @include outer-container()
+  margin-top: 1em
   .text
-    @include span-columns(3)
+    @include row()
+    @include span-columns(4)
     padding: 1em 0 0 0
-  #top-10
-    @include span-columns(7)
+  .graph
+    @include span-columns(6)
+    h2
+      text-align: center
 #map
   @include span-columns(10)
   @include row()
